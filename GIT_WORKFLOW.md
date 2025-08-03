@@ -151,7 +151,7 @@ Use conventional commits:
 
 ### **2. Connect Local to GitHub**
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/laravel-aise.git
+git remote add origin https://github.com/ekapasha17/laravel-aise.git
 git push -u origin master
 git push -u origin develop
 ```
@@ -224,16 +224,17 @@ npm run build
 
 ### **Current Project Status:**
 ```bash
-# ✅ Your project is already set up with:
-# - Git repository initialized
+# ✅ Your project is now connected to GitHub:
+# - Git repository: https://github.com/ekapasha17/laravel-aise.git
 # - Initial commit completed (68 files)
-# - master branch (stable baseline)
-# - develop branch (active development)
-# - feature/authentication-setup branch (example)
+# - master branch pushed (stable baseline)
+# - develop branch pushed (active development)
+# - Ready for feature development
 
 # Check current status:
 git branch -v
 git status
+git remote -v
 ```
 
 ### **Initial Repository Setup:**
@@ -262,18 +263,18 @@ git branch -v
 
 ### **Clean Up Example Branch (Optional):**
 ```bash
-# Remove the example feature branch we created
-git branch -d feature/authentication-setup
+# ✅ Example feature branch already cleaned up
+# Ready to create new feature branches as needed
 
-# Or keep it if you want to use it for authentication work
-git checkout feature/authentication-setup
+# Create your first real feature:
+git checkout -b feature/authentication
 # ...make your authentication changes...
 ```
 
 ### **Connect to GitHub:**
 ```bash
-# Add remote (replace YOUR_USERNAME with your actual GitHub username)
-git remote add origin https://github.com/YOUR_USERNAME/laravel-aise.git
+# Add remote (using your actual repository)
+git remote add origin https://github.com/ekapasha17/laravel-aise.git
 
 # Push master branch first (stable baseline)
 git checkout master
@@ -331,7 +332,7 @@ git branch -v
 **Issue: Remote already exists**
 ```bash
 git remote remove origin
-git remote add origin https://github.com/YOUR_USERNAME/laravel-aise.git
+git remote add origin https://github.com/ekapasha17/laravel-aise.git
 ```
 
 **Issue: Branch conflicts**
