@@ -58,8 +58,11 @@ apiClient.interceptors.response.use(
             switch (status) {
                 case 401:
                     // Unauthorized - redirect to login
-                    console.warn('Unauthorized access - redirecting to login');
-                    window.location.href = '/login';
+                    if (import.meta.env.DEV) {
+                        console.warn('Unauthorized access - redirecting to login');
+                    }
+                    // Use Laravel route helper or configurable route
+                    window.location.href = window.Laravel?.routes?.login || '/login';
                     break;
 
                 case 403:
