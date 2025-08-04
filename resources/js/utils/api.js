@@ -30,7 +30,8 @@ apiClient.interceptors.request.use(
         }
 
         // Add auth token if available (for API routes)
-        const authToken = localStorage.getItem('auth_token');
+        // Using sessionStorage for better XSS protection
+        const authToken = sessionStorage.getItem('auth_token');
         if (authToken) {
             config.headers['Authorization'] = `Bearer ${authToken}`;
         }
@@ -57,13 +58,16 @@ apiClient.interceptors.response.use(
 
             switch (status) {
                 case 401:
-                    // Unauthorized - redirect to login
+                    // Unauthorized - throw error for components to handle
                     if (import.meta.env.DEV) {
-                        console.warn('Unauthorized access - redirecting to login');
+                        console.warn('Unauthorized access - authentication required');
                     }
-                    // Use Laravel route helper or configurable route
-                    window.location.href = window.Laravel?.routes?.login || '/login';
-                    break;
+                    throw {
+                        type: 'unauthorized',
+                        message: 'Authentication required',
+                        errors: {},
+                        redirectTo: window.Laravel?.routes?.login || '/login'
+                    };
 
                 case 403:
                     // Forbidden
