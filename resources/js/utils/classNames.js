@@ -44,3 +44,33 @@ export function mergeClasses(...inputs) {
     
     return classes.filter(Boolean).join(' ');
 }
+
+/**
+ * Advanced class name utility (similar to clsx/classnames)
+ * Supports strings, objects, arrays, and nested combinations
+ * @param {...any} inputs - Various class inputs
+ * @returns {string} Combined class names
+ */
+export function cn(...inputs) {
+    const classes = [];
+    
+    inputs.forEach(input => {
+        if (!input) return;
+        
+        if (typeof input === 'string' || typeof input === 'number') {
+            classes.push(input);
+        } else if (Array.isArray(input)) {
+            const nested = cn(...input);
+            if (nested) classes.push(nested);
+        } else if (typeof input === 'object') {
+            Object.entries(input).forEach(([key, value]) => {
+                if (value) classes.push(key);
+            });
+        }
+    });
+    
+    return classes.join(' ');
+}
+
+// Export cn as default for convenience
+export default cn;

@@ -1,8 +1,8 @@
 import { Head } from '@inertiajs/react';
-import Card from '../components/Card';
-import Navigation from '../components/Navigation';
-import TechStackCard from '../features/welcome/components/TechStackCard';
-import LaravelLogo from '../features/welcome/components/LaravelLogo';
+import Card from '@components/Card';
+import Navigation from '@components/Navigation';
+import TechStackCard from '@features/welcome/components/TechStackCard';
+import LaravelLogo from '@features/welcome/components/LaravelLogo';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const techStack = [

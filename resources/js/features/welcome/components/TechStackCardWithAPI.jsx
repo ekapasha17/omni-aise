@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { api, apiUtils } from '../../../utils/api';
+import { api, apiUtils } from '@utils/api';
 
 export default function TechStackCard({ title, description }) {
     const [details, setDetails] = useState(null);
