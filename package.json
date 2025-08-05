@@ -25,7 +25,9 @@
         "vite": "^7.0.6"
     },
     "dependencies": {
+        "@heroicons/react": "^2.2.0",
         "@inertiajs/react": "^2.0.17",
+        "chart.js": "^4.4.0",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "yup": "^1.7.0"

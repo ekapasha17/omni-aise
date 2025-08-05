@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect('/');
+            return redirect()->intended('/dashboard');
         }
 
         throw ValidationException::withMessages([
@@ -47,6 +47,9 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Clear all session data
+        $request->session()->flush();
+
+        return redirect()->route('login')->with('message', 'You have been logged out successfully.');
     }
 }
