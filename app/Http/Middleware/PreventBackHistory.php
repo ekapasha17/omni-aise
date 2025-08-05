@@ -17,10 +17,12 @@ class PreventBackHistory
     {
         $response = $next($request);
 
-        // Add headers to prevent caching and back button access
-        $response->headers->set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+        // Add comprehensive headers to prevent caching and back button access
+        $response->headers->set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate, private');
         $response->headers->set('Pragma', 'no-cache');
-        $response->headers->set('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');
+        $response->headers->set('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT');
+        $response->headers->set('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
+        $response->headers->set('X-Accel-Expires', '0');
 
         return $response;
     }

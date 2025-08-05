@@ -34,3 +34,11 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+// API route for auth check
+Route::get('/api/auth-check', function () {
+    if (auth()->check()) {
+        return response()->json(['authenticated' => true, 'user' => auth()->user()]);
+    }
+    return response()->json(['authenticated' => false], 401);
+})->name('auth.check');

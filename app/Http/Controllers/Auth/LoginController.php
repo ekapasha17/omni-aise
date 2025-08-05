@@ -50,6 +50,10 @@ class LoginController extends Controller
         // Clear all session data
         $request->session()->flush();
 
-        return redirect()->route('login')->with('message', 'You have been logged out successfully.');
+        return redirect()->route('login')
+            ->with('message', 'You have been logged out successfully.')
+            ->header('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT');
     }
 }
