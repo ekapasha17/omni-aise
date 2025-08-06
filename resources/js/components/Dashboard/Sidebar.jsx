@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import { isRouteActive } from '@/utils/navigationUtils';
 import { 
     HomeIcon, 
     ChartBarIcon, 
@@ -14,6 +15,7 @@ import {
 
 export default function Sidebar({ activeTab, setActiveTab, sidebarOpen }) {
     const [storageSubmenuOpen, setStorageSubmenuOpen] = useState(false);
+    const { url } = usePage(); // Get current URL to determine active route
 
     const menuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: HomeIcon, route: '/dashboard' },
@@ -100,18 +102,31 @@ export default function Sidebar({ activeTab, setActiveTab, sidebarOpen }) {
                                     )}
                                 </>
                             ) : (
-                                <Link
-                                    href={item.route}
-                                    onClick={() => setActiveTab(item.id)}
-                                    className={`flex items-center w-full p-2 rounded-lg font-medium ${
-                                        activeTab === item.id
-                                            ? 'bg-blue-600 text-white'
-                                            : 'text-gray-700 hover:bg-gray-100'
-                                    }`}
-                                >
-                                    <item.icon className="w-5 h-5 mr-3" />
-                                    <span>{item.label}</span>
-                                </Link>
+                                item.route === '#' ? (
+                                    <button
+                                        onClick={() => setActiveTab(item.id)}
+                                        className={`flex items-center w-full p-2 rounded-lg font-medium ${
+                                            isRouteActive(item.route, item.id, url, activeTab)
+                                                ? 'bg-blue-600 text-white'
+                                                : 'text-gray-700 hover:bg-gray-100'
+                                        }`}
+                                    >
+                                        <item.icon className="w-5 h-5 mr-3" />
+                                        <span>{item.label}</span>
+                                    </button>
+                                ) : (
+                                    <Link
+                                        href={item.route}
+                                        className={`flex items-center w-full p-2 rounded-lg font-medium ${
+                                            isRouteActive(item.route, item.id, url, activeTab)
+                                                ? 'bg-blue-600 text-white'
+                                                : 'text-gray-700 hover:bg-gray-100'
+                                        }`}
+                                    >
+                                        <item.icon className="w-5 h-5 mr-3" />
+                                        <span>{item.label}</span>
+                                    </Link>
+                                )
                             )}
                         </li>
                     ))}
