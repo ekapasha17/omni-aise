@@ -28,6 +28,20 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'prevent.back'])->name('dashboard');
 
+// User Management route (protected)
+Route::get('/user-management', function () {
+    return Inertia::render('UserManagement', [
+        'auth' => [
+            'user' => auth()->user(),
+        ],
+        'notifications' => [
+            ['id' => 1, 'title' => 'New user registered', 'time' => '2 minutes ago', 'read' => false],
+            ['id' => 2, 'title' => 'Server update completed', 'time' => '1 hour ago', 'read' => false],
+            ['id' => 3, 'title' => 'Backup process failed', 'time' => '3 hours ago', 'read' => true],
+        ],
+    ]);
+})->middleware(['auth', 'prevent.back'])->name('user-management');
+
 // Authentication Routes
 Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 
